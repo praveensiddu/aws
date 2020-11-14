@@ -1,6 +1,6 @@
 # Welcome to LAMP on AWS!
 
-The examples in this folder contains instructions to quickly install LAMP stack on AWS Linux 2 and configure TLS. 
+The examples in this folder contains instructions to quickly [install LAMP stack on AWS Linux 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html) and configure TLS. 
 ## Steps
 ###  Create AWS Linux2 Instance usng this as cloud init  
 - https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
@@ -18,5 +18,6 @@ The examples in this folder contains instructions to quickly install LAMP stack 
 [phyMyAdmin](https://www.phpmyadmin.net/) is a web-based database management tool that you can use to view and edit the MySQL databases on your EC2 instance
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/phpAdmin-install-config.sh
 - bash phpAdmin-install-config.sh
-
+- access phpAdmin page http://<yourdomain>/phpMyAdmin/ and make you you can login as admin
+- http://<yourdomain>/phpMyAdmin/setup click on download to do any further configuration
 > Note of thanks. This README.md was edited using https://stackedit.io/app#. 

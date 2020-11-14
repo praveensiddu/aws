@@ -1,11 +1,13 @@
 #!/bin/bash
+
+# Instruction can be found here https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html
 sudo yum update -y
-sudo yum install tree -yum
-sudo yum install -y httpd24 php72 mysql57-server php72-mysqlnd
+sudo yum install tree -y
+# this works only on Amazon Linux 2
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+sudo yum install -y httpd mariadb-server
 #Start the Apache web server.
-sudo service httpd start
-# start at each system boot
-sudo chkconfig httpd on
-sleep 1
-# make sure httpd is running
-chkconfig --list httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+# verify if it is enabled
+sudo systemctl is-enabled httpd

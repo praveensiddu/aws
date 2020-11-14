@@ -12,4 +12,4 @@ The examples in this folder contains instructions to quickly install LAMP stack 
 - bash configure-tls.sh
 ###  Secure the database server
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/secure-db
-- bash secure-db
+- bash secure-db.sh

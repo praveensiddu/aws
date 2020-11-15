@@ -8,6 +8,6 @@ cd /etc/haproxy
 sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/haproxy.cfg
 sudo yum install haproxy -y
 echo "set -o vi" >> ~/.bashrc
-sudo echo "set -o vi" >> ~root/.bashrc
+sudo bash -c 'echo set -o vi >> ~root/.bashrc'
 
 mkdir ~/keys

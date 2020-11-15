@@ -11,6 +11,10 @@ This page contains instructions to create a bastion host in AWS.
 ### Create AWS Linux2 Instance usng this as cloud init
 - https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
+### Configure SSH keys
+SSH access to all other hosts should go through Bastion. The private key to login to other hosts should be available only on Bastion. The public key should be used while creating the instances. Copy the private key to this location 
+- /home/ec2-user/.ssh/id_rsa
+- chmod 0400 /home/ec2-user/.ssh/id_rsa
 ### HAProxy
 - Make sure http and https ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp

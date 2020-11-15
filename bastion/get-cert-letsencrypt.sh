@@ -17,8 +17,9 @@ sudo ls /etc/letsencrypt/live/$1
 sudo mkdir -p /etc/haproxy/certs
 
 # create the combined file 
-DOMAIN='$1" sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
+DOMAIN="$1" && sudo -E bash -c "cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem"
 
-
+#Secure access to the combined file, which contains the private key, with this command:
 sudo chmod -R go-rwx /etc/haproxy/certs
 
+ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem 

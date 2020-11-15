@@ -5,7 +5,7 @@ This page contains instructions to create a bastion host in AWS.
   - This should be improved further to allow access only from known IP's
   - Automatically configure the security group with the IP you are using to connect
   - All other servers must be internal and SSH access should be limited to Bastion host.
-1. Configure Mobaxterm to be able to access other servers via Bastion
+2. Configure Mobaxterm to be able to access other servers via Bastion
 
 ## Steps
 ### Create AWS Linux2 Instance usng this as cloud init

@@ -5,7 +5,7 @@ then
 fi
 
 
-sudo amazon-linux-extras install epel
+sudo amazon-linux-extras install epel -y
 sudo yum install certbot -y
 
 # Temporariry stop haproxy
@@ -22,8 +22,9 @@ DOMAIN="$1" && sudo -E bash -c "cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem 
 #Secure access to the combined file, which contains the private key, with this command:
 sudo chmod -R go-rwx /etc/haproxy/certs
 
-ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem 
+sudo ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem 
 
 cd /etc/haproxy
+sudo rm -f haproxy-tls.cfg
 sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/haproxy-tls.cfg
-cp -f haproxy-tls.cfg haproxy.cfg
+sudo cp -f haproxy-tls.cfg haproxy.cfg

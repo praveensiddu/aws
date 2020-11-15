@@ -22,7 +22,7 @@ SSH access to all other hosts should go through Bastion. The private key to logi
 - systemctl start haproxy
 - systemctl enable haproxy
 ### Configure TLS
-- Instructions were derived from [here](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)
+- Below instructions were derived from [here](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)
 - Update **yourdomain** to point the bastion host public IP. It is recommended to reserve an elastic IP in AWS and assign it to bastion host.
 - Get new certs in /etc/haproxy/certs
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/get-cert-letsencrypt.sh
@@ -32,7 +32,7 @@ SSH access to all other hosts should go through Bastion. The private key to logi
     - (A)gree/(C)ancel: ***Y***
     - (Y)es/(N)o: Y
 - sudo systemctl restart haproxy
-- open https://yourdomain and https://yourdomain/phpMyAdmin in your browzer
+- Make sure your backend apache server is running and open https://yourdomain and https://yourdomain/phpMyAdmin in your browzer to test it.
 
 
 > Note of thanks. This README.md was edited using https://stackedit.io/app#.

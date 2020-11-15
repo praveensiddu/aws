@@ -23,3 +23,7 @@ DOMAIN="$1" && sudo -E bash -c "cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem 
 sudo chmod -R go-rwx /etc/haproxy/certs
 
 ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem 
+
+cd /etc/haproxy
+sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/haproxy-tls.cfg
+cp -f haproxy-tls.cfg haproxy.cfg

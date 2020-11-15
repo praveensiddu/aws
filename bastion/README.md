@@ -21,5 +21,9 @@ This page contains instructions to create a bastion host in AWS.
 - systemctl start haproxy
 - systemctl enable haproxy
 
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7
+
+
 > Note of thanks. This README.md was edited using https://stackedit.io/app#. 
 

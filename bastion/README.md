@@ -21,12 +21,12 @@ This page contains instructions to create a bastion host in AWS.
 - Instructions were derived from [here](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)
 - Update **<yourdomain>** to point the bastion host public IP
 - Get new certs in /etc/haproxy/certs
--- wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/get-cert-letsencrypt.sh
--- bash get-cert-letsencrypt.sh **<yourdomain>**
-At the prompts enter the following
- (Enter 'c' to cancel): ***youremailaddress.com***
- (A)gree/(C)ancel: ***Y***
- (Y)es/(N)o: Y
+  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/get-cert-letsencrypt.sh
+  - bash get-cert-letsencrypt.sh **<yourdomain>**
+  - At the prompts enter the following
+    - (Enter 'c' to cancel): ***youremailaddress.com***
+    - (A)gree/(C)ancel: ***Y***
+    - (Y)es/(N)o: Y
 - sudo systemctl restart haproxy
 - open https://<yourdomain> in browzer
 

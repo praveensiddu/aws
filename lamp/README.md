@@ -8,9 +8,10 @@ The examples in this folder contains instructions to quickly [install LAMP stack
 ###  Configure Apache 
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh
 - bash configure-apache.sh
-###  Configure TLS
+###  Configure self signed TLS
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-tls.sh
 - bash configure-tls.sh
+- look at https://github.com/praveensiddu/aws/tree/main/bastion#configure-tls for cert signed by lets encrypt
 ###  Secure the database server
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/secure-db.sh
 - bash secure-db.sh

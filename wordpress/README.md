@@ -4,5 +4,5 @@ Below instructions are derived from https://docs.aws.amazon.com/AWSEC2/latest/Us
 
 ##
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/install-wordpress.sh
-- export MYSQL_ROOTPASSWORD=<password>
+- export MYSQL_ROOTPASSWORD=password
 - bash install-wordpress.sh

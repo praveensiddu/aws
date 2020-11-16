@@ -1,6 +1,14 @@
 
 #Below instructions are derived from https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress.html
 
+if [[ "$MYSQL_ROOTPASSWORD" == "" ]]
+then
+        echo "Please set the environmnet variable MYSQL_ROOTPASSWORD"
+        exit 1
+fi
+
+echo "Generate random password"
+export wordpress_db_pass=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`
 
 echo downloading wordpress from https://wordpress.org/latest.tar.gz
 wget https://wordpress.org/latest.tar.gz
@@ -8,17 +16,7 @@ wget https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
 cp wordpress/wp-config-sample.php wordpress/wp-config.php
 
-echo "Generate random password"
-export wordpress_db_pass=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`
 
-echo $wordpress_db_pass > password.txt
-
-if [[ $? != 0 ]]
-then
-        echo "Unable to store password file."
-        exit 1
-fi
-echo "password is stored here. Make a note of it and delete the file"
 
 wget https://api.wordpress.org/secret-key/1.1/salt/ -O salt.txt
 
@@ -66,14 +64,21 @@ export pattern="'NONCE_SALT'"
 export saltline=`grep "$pattern" salt.txt`
 sed -i "/$pattern/c\\$saltline" wordpress/wp-config.php
 
-exit 0
-
 
 sudo systemctl start mariadb
-mysql -u root --password=$MYSQL_PASSWORD
+wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/wordpress-db.sql
+sed -i "s/your_strong_password/$wordpress_db_pass/g" wordpress-db.sql
+
+# TBD remove the file since it contains password
+
+mysql -u root --password=$MYSQL_ROOTPASSWORD < wordpress-db.sql
 
 cp -r wordpress/* /var/www/html/
-   25  sudo vim /etc/httpd/conf/httpd.conf
+
+sed '/<Directory \"\/var\/www\/html\">/,/AllowOverride None/ {
+s/AllowOverride None/AllowOverride All/
+}' /etc/httpd/conf/httpd.conf
+
 sudo yum install php-gd -y
 sudo chown -R apache /var/www
 sudo chgrp -R apache /var/www
@@ -84,6 +89,7 @@ sudo systemctl restart httpd
 sudo systemctl enable httpd && sudo systemctl enable mariadb
 sudo systemctl status mariadb
 sudo systemctl status httpd
+
 
 
 

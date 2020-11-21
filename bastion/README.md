@@ -15,6 +15,13 @@ This page contains instructions to create a bastion host in AWS.
 SSH access to all other hosts should go through Bastion. The private key to login to other hosts should be available only on Bastion. The public key should be used while creating the instances. Copy the private key to this location 
 - /home/ec2-user/.ssh/id_rsa
 - chmod 0400 /home/ec2-user/.ssh/id_rsa
+### Configure programatic access
+We would be launching insstances using this bastion host. So enable programatic access and remove it each time 
+-aws configure
+  - AWS Access Key ID [None]: 
+  - AWS Secret Access Key [None]: 
+  - Default region name [None]: us-east-1
+
 ### HAProxy
 - Make sure http and https ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp

@@ -26,6 +26,9 @@ We would be launching insstances using this bastion host. So enable programatic 
   - AWS Secret Access Key [None]: 
   - Default region name [None]: us-east-1
 
+### Configure public IP
+It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP your own.
+
 ### HAProxy
 - Make sure http and https ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp

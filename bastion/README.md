@@ -13,11 +13,15 @@ This page contains instructions to create a bastion host in AWS.
 > If you forgot to create the instance with user-data you can wget this file and execute it
 ### Configure SSH keys
 SSH access to all other hosts should go through Bastion. The private key to login to other hosts should be available only on Bastion. The public key should be used while creating the instances. Copy the private key to this location 
-- /home/ec2-user/.ssh/id_rsa
+- Create any instance on aws on create fresh pair of keys. Recommed to have bastion in the key name
+- Download the private key and then copy the private key to bastion host
+- Login to the newly created instance and copy the public key file ~/.ssh/authorized_keys to your local laptop. You may need it in future.
+- copy the private key you donwloaded on your laptop to bastion host.
+  - cp yourprivatekey_onbastion.pem /home/ec2-user/.ssh/id_rsa
 - chmod 0400 /home/ec2-user/.ssh/id_rsa
 ### Configure programatic access
 We would be launching insstances using this bastion host. So enable programatic access and remove it each time 
--aws configure
+- aws configure
   - AWS Access Key ID [None]: 
   - AWS Secret Access Key [None]: 
   - Default region name [None]: us-east-1

@@ -1,5 +1,5 @@
-# Welcome to Tomcat on K3s in AWS
-This page contains instructions to run a tomcat container on K3s in AWS.
+# Welcome to K3s in AWS
+This page contains instructions to run K3s in AWS and deploy a sample application nginx. 
 
 ## Create Ubuntu instance usng this as cloud init
 Either create using CLI or manually on the UI.
@@ -8,12 +8,12 @@ Either create using CLI or manually on the UI.
 ### Using CLI
 - Set environment varaible to the SSH key name used to SSH from bastion
 export MYSSHKEYNAME=aws-swift-bastion-praveen
-- rm -f create-instance.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/tomcat-on-k3s/create-instance.sh
+- rm -f create-instance.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/create-instance.sh
 - bash create-instance.sh
 ### Using GUI
 - Create Ubuntu instance with 
   - SSH key name used to SSH from bastion
-  - https://raw.githubusercontent.com/praveensiddu/aws/main/tomcat-on-k3s/cloud-init.sh
+  - https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
 - if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
 
@@ -21,5 +21,7 @@ export MYSSHKEYNAME=aws-swift-bastion-praveen
 - ssh from bastion to the new host
 - curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ## Deploy NGINX to test
-- kubectl apply -f https://raw.githubusercontent.com/myannou/k3d-demo/master/nginx.yaml
+- kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml
+- kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_service.yaml
+- kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_ingress.yaml
 - kubectl get pods

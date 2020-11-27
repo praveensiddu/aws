@@ -2,6 +2,7 @@
 sudo yum update -y
 sudo yum install tree -y
 sudo yum install docker -y
+sudo yum install jq -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install

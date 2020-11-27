@@ -1,11 +1,17 @@
 # Creating a Bastion host on AWS
 This page contains instructions to create a bastion host in AWS.
+
+## Concept
+Bastion hosts (also called “jump servers”) are often used as a best practice for accessing privately accessible hosts within a system environment. For example, your system might include an application host that is not intended to be publicly accessible. To access it for product updates or managing system patches, you typically log in to a bastion host and then access (or “jump to”) the application host from there. 
+Access to the bastion host is ideally restricted to a specific IP range, typically from your organization’s corporate network or IP assigned to your home router by ISP. The benefit of using a bastion host in this regard is that access to any of the internal hosts is isolated to one means of access: through either a single bastion host or a group. For further isolation, the bastion host generally resides in a separate VPC.
+
 ## Goals
 1. Only Bastion host is accessible from internet via SSH
   - This should be improved further to allow access only from known IP's
   - Automatically configure the security group with the IP you are using to connect
   - All other servers must be internal and SSH access should be limited to Bastion host.
 2. Configure Mobaxterm to be able to access other servers via Bastion
+3. Automate update of allowed source IP's that can login to Bastion after 2FA.
 
 ## Steps
 ### Create AWS Linux2 Instance usng this as cloud init
@@ -50,4 +56,4 @@ It is recommended to reserve an elastic IP in AWS and assign it to bastion host.
 - Make sure your backend apache server is running and open https://yourdomain and https://yourdomain/phpMyAdmin in your browzer to test it.
 
 
-> Note of thanks. This README.md was edited using https://stackedit.io/app#.
+> Note of thanks. This README.md was edited using   

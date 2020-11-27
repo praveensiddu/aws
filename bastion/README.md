@@ -8,10 +8,12 @@ Access to the bastion host is ideally restricted to a specific IP range, typical
 ## Goals
 1. Only Bastion host is accessible from internet via SSH
   - This should be improved further to allow access only from known IP's
-  - Automatically configure the security group with the IP you are using to connect
+  - Automatically configure the bastion security group allowed source IP's with the IP you are using to connect after 2FA check.
   - All other servers must be internal and SSH access should be limited to Bastion host.
-2. Configure Mobaxterm to be able to access other servers via Bastion
-3. Automate update of allowed source IP's that can login to Bastion after 2FA.
+2. Configure Mobaxterm to be able to access other internal hosts via Bastion
+  - Edit Session->Network Settings->
+  - Remote Host=internal host ip, username internal host username. In connect through ssh gateway use bastion settings
+
 
 ## Steps
 ### Create AWS Linux2 Instance usng this as cloud init

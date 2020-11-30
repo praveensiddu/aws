@@ -28,8 +28,10 @@ SSH access to all other hosts should go through Bastion. The private key to logi
   - cp yourprivatekey_onbastion.pem /home/ec2-user/.ssh/id_rsa
 - chmod 0400 /home/ec2-user/.ssh/id_rsa
 ### Configure programatic access
-We would be launching insstances using this bastion host. So enable programatic access and remove it each time 
-- aws configure
+We would be launching insstances using this bastion host. So enable programatic access from Bastion host and remove it when you are done.
+- Create a non root user in IAM( since root account must not be used for programatic access). Assign AdministratorAccess privilege to the user( Ideally only limited privilege must be given)
+- Login as that IAM user. "Create access key" and download from here https://console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials
+- Run "aws configure" on bastion host.
   - AWS Access Key ID [None]: 
   - AWS Secret Access Key [None]: 
   - Default region name [None]: us-east-1

@@ -25,13 +25,14 @@ export MYSSHKEYNAME=aws-swift-bastion-praveen
 - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml
 - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_service.yaml
 - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_ingress.yaml
-- kubectl get pods
-- run curl localhost:80
-- kubectl delete deployment nginx
-- curl localhost:80
--- Service Unavailable
-- kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml
-- curl localhost:80
+- Verify your deployment
+  - kubectl get pods
+  - run curl localhost:80
+  - kubectl delete deployment nginx
+  - curl localhost:80
+    - It should display "Service Unavailable"
+  - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml
+  - curl localhost:80
 
 
 

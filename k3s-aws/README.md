@@ -7,8 +7,9 @@ Either create using CLI or manually on the UI.
 - Find your keypair name that you use to SSH from bastion here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
 ### Create instance using CLI
 Create Ubuntu instance
+- Login to bastion host
 - Set environment varaible to the SSH key name used to SSH from bastion
-export MYSSHKEYNAME=aws-swift-bastion-praveen
+  - export MYSSHKEYNAME=aws-swift-bastion-praveen
 - rm -f create-instance.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/create-instance.sh
 - bash create-instance.sh
 ### Create instance using GUI

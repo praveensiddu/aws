@@ -12,20 +12,22 @@ Parameters:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
     Type: 'AWS::EC2::KeyPair::KeyName'
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
-  AmiID:
-    Description: AMI ID to use. Use this command to determine the latest amiid TBD
-    Type: String
-    ConstraintDescription: must be the name of an existing EC2 KeyPair.
   DBName:
-    Default: ApacheDatabase
+    Default: MyDatabase
     Description: MySQL database name
     Type: String
     MinLength: '1'
     MaxLength: '64'
     AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
+  AMIId:
+    Description: AMI ID
+    Type: String
+    MinLength: '1'
+    MaxLength: '64'
+    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   DBUser:
-    Default: apacheuser
     NoEcho: 'true'
     Description: Username for MySQL database access
     Type: String
@@ -35,7 +37,7 @@ Parameters:
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   DBPassword:
     NoEcho: 'true'
-    Description: Password for apache MySQL database access
+    Description: Password for MySQL database access
     Type: String
     MinLength: '1'
     MaxLength: '41'
@@ -53,6 +55,8 @@ Parameters:
     Description: WebServer EC2 instance type
     Type: String
     Default: t2.small
+    MinLength: '1'
+    MaxLength: '41'
     ConstraintDescription: must be a valid EC2 instance type.
   SSHLocation:
     Description: ' The IP address range that can be used to SSH to the EC2 instances'
@@ -66,8 +70,7 @@ Resources:
   WebServerInstance:
     Type: 'AWS::EC2::Instance'
     Properties:
-      ImageId: !Ref AmiID
-      InstanceType: !Ref InstanceType
+      ImageId: !Ref AmiID 
       SecurityGroups:
         - !Ref WebServerSecurityGroup
       KeyName: !Ref KeyName

@@ -58,6 +58,11 @@ Parameters:
     MinLength: '1'
     MaxLength: '41'
     ConstraintDescription: must be a valid EC2 instance type.
+  SourceSSHSecurityGroup:
+    Description: 'The security group that is allowed to SSH to this instance'
+    Type: AWS::EC2::SecurityGroup
+    Default: bastion-host-securitygroup
+    ConstraintDescription: must be an existing security group assigned to bastion host
   SSHLocation:
     Description: ' The IP address range that can be used to SSH to the EC2 instances'
     Type: String
@@ -74,19 +79,12 @@ Resources:
       SecurityGroups:
         - !Ref WebServerSecurityGroup
       KeyName: !Ref KeyName
-      UserData: !Base64 
-        'Fn::Join':
-          - ''
-          - - |
-              #!/bin/bash -xe
-            - |
-              echo "DBUser=" !Ref DBUser >> secrets.txt
-            - |
-              echo "DBRootPassword=" !Ref DBRootPassword >> secrets.txt
-            - |
-              echo "DBName=" !Ref DBName >> secrets.txt
-            - |+
-
+      UserData:
+        Fn::Base64:                                # YAML makes userdata much cleaner
+          !Sub |
+              #!/bin/bash -ex
+              echo hello >> secrets.txt
+              !Ref DBUser >> secrets.txt
     CreationPolicy:
       ResourceSignal:
         Timeout: PT5M
@@ -102,7 +100,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
-          CidrIp: !Ref SSHLocation
+          SourceSecurityGroupId: !Ref SourceSSHSecurityGroup
 Outputs:
   WebsiteURL:
     Description: URL for newly created LAMP stack

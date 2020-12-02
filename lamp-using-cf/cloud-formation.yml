@@ -13,7 +13,7 @@ Parameters:
     Type: 'AWS::EC2::KeyPair::KeyName'
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
   DBName:
-    Default: MyDatabase
+    Default: wordpressdb
     Description: MySQL database name
     Type: String
     MinLength: '1'
@@ -27,6 +27,7 @@ Parameters:
     MaxLength: '64'
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   DBUser:
+    Default: wordpressuser
     NoEcho: 'true'
     Description: Username for MySQL database access
     Type: String

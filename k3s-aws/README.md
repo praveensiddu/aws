@@ -30,7 +30,7 @@ Create Ubuntu instance
 - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_ingress.yaml
 - Verify your deployment
   - kubectl get pods
-  - run curl localhost:80
+  - curl localhost:80
   - kubectl delete deployment nginx
   - curl localhost:80
     - It should display "Service Unavailable"

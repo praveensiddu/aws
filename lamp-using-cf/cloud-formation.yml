@@ -90,9 +90,6 @@ Resources:
               - Ref: DBUser
               - "\" >> secrets.txt\n"
               - "\n"
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: PT5M
   WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:

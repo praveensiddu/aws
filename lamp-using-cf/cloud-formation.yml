@@ -88,11 +88,14 @@ Resources:
               - "# Store the user input values\n"
               - "echo \"DBUser="
               - Ref: DBUser
+              - "\" >> secrets.txt\n"
               - "echo \"DBName="
               - Ref: DBName
+              - "\" >> secrets.txt\n"
               - "echo \"DBPassword="
               - Ref: DBPassword
-              - "echo \"DBRootPassword="
+              - "\" >> secrets.txt\n"
+              - "\necho \"DBRootPassword="
               - Ref: DBRootPassword
               - "\" >> secrets.txt\n"
               - "\n"

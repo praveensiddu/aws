@@ -19,14 +19,6 @@ Access to the bastion host is ideally restricted to a specific IP range, typical
 ### Create AWS Linux2 Instance usng this as cloud init
 - https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
-### Configure SSH keys
-SSH access to all other hosts should go through Bastion. The private key to login to other hosts should be available only on Bastion. The public key should be used while creating the instances. Copy the private key to this location 
-- Create any instance on aws on create fresh pair of keys. Recommed to have bastion in the key name
-- Download the private key and then copy the private key to bastion host
-- Login to the newly created instance and copy the public key file ~/.ssh/authorized_keys to your local laptop. You may need it in future.
-- copy the private key you donwloaded on your laptop to bastion host.
-  - cp yourprivatekey_onbastion.pem /home/ec2-user/.ssh/id_rsa
-- chmod 0400 /home/ec2-user/.ssh/id_rsa
 ### Configure programatic access
 We would be launching insstances using this bastion host. So enable programatic access from Bastion host and remove it when you are done.
 - Create a non root user in IAM( since root account must not be used for programatic access). Assign AdministratorAccess privilege to the user( Ideally only limited privilege must be given)
@@ -35,6 +27,14 @@ We would be launching insstances using this bastion host. So enable programatic 
   - AWS Access Key ID [None]: 
   - AWS Secret Access Key [None]: 
   - Default region name [None]: us-east-1
+### Configure SSH keys
+SSH access to all other hosts should go through Bastion. The private key to login to other hosts should be kept only on Bastion. While creating the instances use this key name.
+- Login to bastion as ec2-user
+- aws ec2 create-key-pair --key-name bastion-to-other-hosts --query 'KeyMaterial' --output text > bastion-to-other-hosts.pem
+- copy the private key you donwloaded on your laptop to bastion host.
+  - cp bastion-to-other-hosts.pem /home/ec2-user/.ssh/id_rsa
+- chmod 0400 /home/ec2-user/.ssh/id_rsa
+- For backup purpose download bastion-to-other-hosts.pem from bastion to your laptop and safestore it securely.
 
 ### Configure public IP
 It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP your own.

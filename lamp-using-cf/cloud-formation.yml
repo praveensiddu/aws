@@ -88,6 +88,12 @@ Resources:
               - "# Store the user input values\n"
               - "echo \"DBUser="
               - Ref: DBUser
+              - "echo \"DBName="
+              - Ref: DBName
+              - "echo \"DBPassword="
+              - Ref: DBPassword
+              - "echo \"DBRootPassword="
+              - Ref: DBRootPassword
               - "\" >> secrets.txt\n"
               - "\n"
   WebServerSecurityGroup:

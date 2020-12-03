@@ -37,6 +37,7 @@ SSH access to all other hosts should go through Bastion. The private key to logi
 - chmod 0400 /home/ec2-user/.ssh/id_rsa
 - For backup purpose download bastion-to-other-hosts-key.pem from bastion to your laptop and safestore it securely.
 ### Create security group and attach to bastion instance
+In future when new instances are created allow network access to it from this security group "access-via-bastion-secgrp".
 - Login to bastion as ec2-user
 - myinstanceid=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id)
 - echo $myinstanceid

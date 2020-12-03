@@ -15,10 +15,11 @@ Access to the bastion host is ideally restricted to a specific IP range, typical
   - Remote Host=internal host ip, username internal host username. In connect through ssh gateway use bastion settings
 
 
-## Steps
-### Create AWS Linux2 Instance usng this as cloud init
+# Create Bastion instance
+## Create AWS Linux2 Instance using this as cloud init
 - https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
+## Configure Bastion
 ### Configure programatic access
 We would be launching insstances using this bastion host. So enable programatic access from Bastion host and remove it when you are done.
 - Create a non root user in IAM( since root account must not be used for programatic access). Assign AdministratorAccess privilege to the user( Ideally only limited privilege must be given)
@@ -48,7 +49,8 @@ SSH access to all other hosts should go through Bastion. The private key to logi
 ### Configure public IP
 It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP your own.
 
-### HAProxy
+# HAProxy
+You may choose to run load balancer on bastion to save on instance cost. 
 - Make sure http and https ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
 - If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the IP address of the apache server. This name is used in haproxy backend configuration.

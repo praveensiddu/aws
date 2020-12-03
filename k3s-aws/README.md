@@ -12,7 +12,7 @@ This page contains instructions to run K3s in AWS and deploy a sample applicatio
 Create Ubuntu instance
 - Login to bastion host
 - Set environment varaible to the SSH key name used to SSH from bastion
-  - export MYSSHKEYNAME=bastion-to-other-hosts
+  - export MYSSHKEYNAME=bastion-to-other-hosts-key
 - rm -f create-instance.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/create-instance.sh
 - bash create-instance.sh
 ### Create Ubuntu instance using GUI

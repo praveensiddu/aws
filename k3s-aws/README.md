@@ -2,9 +2,8 @@
 This page contains instructions to run K3s in AWS and deploy a sample application nginx. 
 
 ## Prep steps
-
 - Make sure bastion host is configured for programmatic access https://github.com/praveensiddu/aws/tree/main/bastion#configure-programatic-access
-- Make sure you have the ssh private keys on bastion as described here 
+- Make sure the ssh private keys on bastion is created as described here https://github.com/praveensiddu/aws/tree/main/bastion#configure-ssh-keys
 - You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
 ## Either create using CLI or manually on the UI.
 ### Create Ubuntu instance using CLI

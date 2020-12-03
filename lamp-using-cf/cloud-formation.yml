@@ -79,14 +79,16 @@ Resources:
         - !Ref WebServerSecurityGroup
       KeyName: !Ref KeyName
        UserData:
-        Fn::Base64:                                # YAML makes userdata much cleaner
-          !Sub
-            - |
-              #!/bin/bash -ex
-              echo hello >> secrets.txt
-              echo DBUser=${DBUser}  >> secrets.txt
-              echo hello2 >> secrets.txt
-            - { DBUser: Ref DBUser }
+        Fn::Base64:
+          Fn::Join:
+            - ''
+            - - "#!/bin/bash -xe\n"
+            - "echo hello >> secrets.txt\n"
+            - "# Store the user input values\n"
+            - "echo \"DBUser="
+            - Ref: DBUser
+            - "\" >> secrets.txt\n"
+            - "\n"
     CreationPolicy:
       ResourceSignal:
         Timeout: PT5M

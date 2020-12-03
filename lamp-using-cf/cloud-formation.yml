@@ -22,11 +22,8 @@ Parameters:
     AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   AmiID:
-    Description: Run this command to find the AMIID aws ec2 describe-images  --owners 099720109477  --filters Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*  --query 'sort_by(Images,&CreationDate)[-1].ImageId'
-    Type: String
-    MinLength: '1'
-    MaxLength: '64'
-    ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
   DBUser:
     Default: wordpressuser
     NoEcho: 'true'

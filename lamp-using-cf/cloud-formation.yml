@@ -63,7 +63,7 @@ Parameters:
     Type: AWS::EC2::SecurityGroup
     Default: bastion-host-securitygroup
     ConstraintDescription: must be an existing security group assigned to bastion host
-  SSHLocation:
+  SourceSSHCidr:
     Description: ' The IP address range that can be used to SSH to the EC2 instances'
     Type: String
     MinLength: '9'

@@ -60,7 +60,7 @@ Parameters:
     ConstraintDescription: must be a valid EC2 instance type.
   SourceSSHSecurityGroup:
     Description: 'The security group that is allowed to SSH to this instance'
-    Type: AWS::EC2::SecurityGroup
+    Type: 'AWS::EC2::SecurityGroup::GroupName'
     Default: bastion-host-securitygroup
     ConstraintDescription: must be an existing security group assigned to bastion host
   SourceSSHCidr:
@@ -84,7 +84,9 @@ Resources:
           !Sub |
               #!/bin/bash -ex
               echo hello >> secrets.txt
-              !Ref DBUser >> secrets.txt
+              echo DBUser=${DBUser}  >> secrets.txt
+              echo hello2 >> secrets.txt
+            - { DBUser: Ref DBUser }
     CreationPolicy:
       ResourceSignal:
         Timeout: PT5M

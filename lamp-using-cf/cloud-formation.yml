@@ -84,12 +84,12 @@ Resources:
           Fn::Join:
             - ''
             - - "#!/bin/bash -xe\n"
-            - "echo hello >> secrets.txt\n"
-            - "# Store the user input values\n"
-            - "echo \"DBUser="
-            - Ref: DBUser
-            - "\" >> secrets.txt\n"
-            - "\n"
+              - "echo hello >> secrets.txt\n"
+              - "# Store the user input values\n"
+              - "echo \"DBUser="
+              - Ref: DBUser
+              - "\" >> secrets.txt\n"
+              - "\n"
     CreationPolicy:
       ResourceSignal:
         Timeout: PT5M

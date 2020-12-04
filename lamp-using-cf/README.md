@@ -27,6 +27,5 @@ This page contains instructions to create lamp stack using cloud formation templ
 
 - Find out the IP of the new instance created
 - ssh ec2-user@newip
-- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp-using-cf/setup.sh
-- bash setup.sh 
+- Follow the instructions here to configure LAMP https://github.com/praveensiddu/aws/tree/main/lamp
 

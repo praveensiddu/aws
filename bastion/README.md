@@ -7,8 +7,8 @@ Access to the bastion host is ideally restricted to a specific IP range, typical
 
 ## Goals
 1. Only Bastion host is accessible from internet via SSH
-  - This should be improved further to allow access only from known IP's
-  - Automatically configure the bastion security group allowed source IP's with the IP you are using to connect after 2FA check.
+  - This should be improved further to allow access only to only known IP's which could be dynamically changing depending on where you connect from.
+  - Automatically configure the bastion security group allowed source IP's with the IP you are using to connect after 2FA check. https://aws.amazon.com/blogs/startups/securing-ssh-to-amazon-ec2-linux-hosts/
   - All other servers must be internal and SSH access should be limited to Bastion host.
 2. Configure Mobaxterm to be able to access other internal hosts via Bastion
   - Edit Session->Network Settings->

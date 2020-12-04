@@ -1,5 +1,11 @@
 # LAMP stack using cloud formation
 This page contains instructions to create lamp stack using cloud formation template
+## Prep steps
+- Make sure bastion host is configured properly https://github.com/praveensiddu/aws/blob/main/bastion/README.md#configure-bastion
+  - for programmatic access
+  - ssh key based login to other hosts.
+  - security group to allow login to other hosts.
+- You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
 
 ###  Create AWS Linux2 Instance using cloud formation
 

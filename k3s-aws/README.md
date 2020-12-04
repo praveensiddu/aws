@@ -24,7 +24,7 @@ Create Ubuntu instance
 
 ## Install K3S
 - Find the private IP of the newly created instance by visiting https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:
-- ssh from bastion to the new host. Example ssh ubuntu@<private ip address of the new instance>
+- ssh from bastion to the new host. Example ssh ubuntu@"private ip address of the new instance"
 - Install K3s by running "curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644"
 ## Deploy NGINX to test
 - kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml

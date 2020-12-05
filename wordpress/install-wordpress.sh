@@ -3,15 +3,15 @@
 
 if [[ "$MYSQL_ROOTPASSWORD" == "" ]]
 then
-        echo "Please set the environmnet variable MYSQL_ROOTPASSWORD"
+        echo "Please set the environment variable MYSQL_ROOTPASSWORD"
         exit 1
 fi
 
 echo "Generate random password"
-export wordpress_db_pass=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`
+export wordpress_db_pass=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev| sed 's/[^a-zA-Z0-9]//g'`
 
 echo downloading wordpress from https://wordpress.org/latest.tar.gz
-wget https://wordpress.org/latest.tar.gz
+/bin/rm -f latest.tar.gz && wget https://wordpress.org/latest.tar.gz
 /bin/rm -rf wordpress
 tar -xzf latest.tar.gz
 cp wordpress/wp-config-sample.php wordpress/wp-config.php
@@ -29,7 +29,7 @@ export saltline="define('DB_USER', 'wordpress-user');"
 sed -i "/$pattern/c\\$saltline" wordpress/wp-config.php
 
 export pattern=DB_PASSWORD
-export saltline="define('DB_PASSWORD', '".$wordpress_db_pass."your_strong_password');"
+export saltline="define('DB_PASSWORD', '"$wordpress_db_pass"');"
 sed -i "/$pattern/c\\$saltline" wordpress/wp-config.php
 
 export pattern="'AUTH_KEY'"
@@ -66,7 +66,7 @@ sed -i "/$pattern/c\\$saltline" wordpress/wp-config.php
 
 
 sudo systemctl start mariadb
-wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/wordpress-db.sql
+/bin/rm -f wordpress-db.sql && wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/wordpress-db.sql
 sed -i "s/your_strong_password/$wordpress_db_pass/g" wordpress-db.sql
 
 # TBD remove the file since it contains password

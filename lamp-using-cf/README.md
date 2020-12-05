@@ -20,11 +20,10 @@ This page contains instructions to create lamp stack using cloud formation templ
 - aws cloudformation validate-template --template-body file://cloud-formation.yml
 
 ###  Create instance 
-
+- aws cloudformation delete-stack --stack-name  stackfromcli
 - aws cloudformation create-stack   --stack-name stackfromcli --template-body  file://cloud-formation.yml --parameters  ParameterKey=DBPassword,ParameterValue=$DBPassword ParameterKey=DBRootPassword,ParameterValue=$DBRootPassword  ParameterKey=KeyName,ParameterValue=$MYSSHKEYNAME ParameterKey=SourceSSHSecurityGroupName,ParameterValue=$BASTION_SECURITY_GROUP
 
 ###  Configure LAMP 
-
 - Find out the IP of the new instance created
 - ssh ec2-user@newip
 - Follow the instructions here to configure LAMP https://github.com/praveensiddu/aws/tree/main/lamp

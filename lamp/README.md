@@ -11,16 +11,17 @@ The examples in this folder contains instructions to quickly [install LAMP stack
 - bash configure-apache.sh
 - curl http://localhost:80
 ###  Configure self signed TLS
-Note this is a self signed TLS certificate. You will have to explicitly trust the browzer.
-- curl https://localhost:443  443 should be unreachable since TLS has not been configured.
+| Note: Steps in this section will configure with a self signed TLS certificate. You will have to explicitly trust the certificate in browzer.
+- curl https://localhost:443  443 should report Connection refused since TLS has not been configured.
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-tls.sh
 - bash configure-tls.sh
 - curl https://localhost:443  should report self signed certificate error
 - curl --insecure https://localhost:443
-- For configuring a browzer trusted certificate use this proceduce  https://github.com/praveensiddu/aws/tree/main/bastion#configure-tls for cert signed by  lets encrypt
+- For configuring a browzer trusted certificate use this procedure  https://github.com/praveensiddu/aws/tree/main/bastion#configure-tls for cert signed by  lets encrypt
 ###  Secure the database server
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/secure-db.sh
 - bash secure-db.sh
+  - Enter current password for root (enter for none):
   - Set root password? [Y/n] Y
   - New password:
   - Re-enter new password:

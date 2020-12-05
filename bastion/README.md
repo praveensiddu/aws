@@ -39,14 +39,10 @@ SSH access to all other hosts should go through Bastion. The private key to logi
 ### Create security group and attach to bastion instance
 In future when new instances are created allow network access to it from this security group "access-via-bastion-secgrp".
 - Login to bastion as ec2-user
-- myinstanceid=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id)
-- echo $myinstanceid
-- current_security_groups=$(aws ec2 describe-instances --instance-ids $myinstanceid --query Reservations[*].Instances[*].SecurityGroups[*].GroupId --output text)
-- echo $current_security_groups
-- aws ec2 create-security-group --description "Bastion security group to access to other hosts" --group-name access-via-bastion-secgrp --tag-specifications "ResourceType=security-group,Tags=[{Key=Name,Value=access-via-bastion}]" --query GroupId  --output text
-- newsecuritygroup=$(aws ec2 describe-security-groups --group-names access-via-bastion-secgrp --query SecurityGroups[*].GroupId --output text)
-- echo $newsecuritygroup
-- aws ec2 modify-instance-attribute --instance-id  $myinstanceid --groups $current_security_groups $newsecuritygroup
+- rm -f create_and_assign_secgrp.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh
+- Create a security group by name access-via-bastion-secgrp and attach it to bastion instance
+  - bash create_and_assign_secgrp.sh access-via-bastion-secgrp
+
 
 ### Configure public IP
 It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP your own.

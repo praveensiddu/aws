@@ -45,10 +45,10 @@ In future when new instances are created allow network access to it from this se
 
 
 ### Configure public IP
-It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP your own.
+It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP you own.
 
 # HAProxy
-You may choose to run load balancer on bastion to save on instance cost. 
+Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But same can be run on any other instance running load balancer.
 - Make sure http and https ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
 - If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the IP address of the apache server. This name is used in haproxy backend configuration.

@@ -1,11 +1,28 @@
 # Welcome to LAMP on AWS!
 
 The examples in this folder contains instructions to quickly [install LAMP stack on AWS Linux 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html) and configure TLS. 
-## Steps
-###  Create AWS Linux2 Instance usng this as cloud init  
-- https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
+
+## Prep steps
+- Make sure bastion host is configured properly https://github.com/praveensiddu/aws/blob/main/bastion/README.md#configure-bastion
+  - for programmatic access
+  - ssh key based login to other hosts.
+  - security group to allow login to other hosts.
+- You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
+## Either create using CLI or manually on the UI.
+### Create AWS Linux2 Instance using CLI
+Create  instance
+- Login to bastion host
+- Set environment varaible to the SSH key name used to SSH from bastion
+  - export MYSSHKEYNAME=bastion-to-other-hosts-key
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/create-instance.sh -O create-instance.sh
+- bash create-instance.sh
+### Create AWS Linux2 Instance using GUI
+- Create Instance on UI with 
+  - SSH key name used to SSH from bastion
+  - with this link as userdata https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
-- if you are routing all traffic through a proxy(Bastion) then you need only ssh from bastion in security group. Else open both http and https in security group.
+- if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
+
 ###  Configure Apache 
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh
 - bash configure-apache.sh

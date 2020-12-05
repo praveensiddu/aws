@@ -9,6 +9,7 @@ Parameters:
 Resources:
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
+    DeletionPolicy: "Retain"
     Properties:
       GroupName: !Ref MySecurityGroup
       GroupDescription: Enable HTTP and HTTPS access

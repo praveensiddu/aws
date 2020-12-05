@@ -12,7 +12,7 @@ The examples in this folder contains instructions to quickly [install LAMP stack
 - curl http://localhost:80
 ###  Configure self signed TLS
 | Note: Steps in this section will configure with a self signed TLS certificate. You will have to explicitly trust the certificate in browzer.
-- curl https://localhost:443  443 should report Connection refused since TLS has not been configured.
+- curl https://localhost:443  should report "Connection refused" since TLS has not been configured.
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-tls.sh
 - bash configure-tls.sh
 - curl https://localhost:443  should report self signed certificate error
@@ -34,6 +34,6 @@ The examples in this folder contains instructions to quickly [install LAMP stack
 [phyMyAdmin](https://www.phpmyadmin.net/) is a web-based database management tool that you can use to view and edit the MySQL databases on your EC2 instance
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/phpAdmin-install-config.sh
 - bash phpAdmin-install-config.sh
-- access phpAdmin page http://yourdomain/phpMyAdmin/ and make you you can login as admin
+- access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root. TBD do not allow remote login to root
 - http://yourdomain/phpMyAdmin/setup click on download to do any further configuration
-> Note of thanks. This README.md was edited using https://stackedit.io/app#. 
+

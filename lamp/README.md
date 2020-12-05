@@ -25,6 +25,8 @@ Create  instance
 
 ###  Configure Apache 
 - Login to newly created host
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh -O cloud-init.sh
+- bash cloud-init.sh
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh -O configure-apache.sh
 - bash configure-apache.sh
 - curl http://localhost:80

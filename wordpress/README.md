@@ -5,7 +5,7 @@ Below instructions are derived from https://docs.aws.amazon.com/AWSEC2/latest/Us
 ##
 - setup the LAMP as specified in https://github.com/praveensiddu/aws/tree/main/lamp
 - login to LAMP
-- wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/install-wordpress.sh
+- rm -f nstall-wordpress.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/wordpress/install-wordpress.sh
 - export MYSQL_ROOTPASSWORD=password
 - bash install-wordpress.sh
 - visit yourdomain in browzer and create the first wordpress administrator user to manage the wordpress website

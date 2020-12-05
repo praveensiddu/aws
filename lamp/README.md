@@ -24,7 +24,8 @@ Create  instance
 - if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
 
 ###  Configure Apache 
-- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh
+- Login to newly created host
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh -O configure-apache.sh
 - bash configure-apache.sh
 - curl http://localhost:80
 ###  Configure self signed TLS

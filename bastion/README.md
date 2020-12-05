@@ -39,7 +39,7 @@ SSH access to all other hosts should go through Bastion. The private key to logi
 ### Create security group and attach to bastion instance
 In future when new instances are created allow network access to it from this security group "access-via-bastion-secgrp".
 - Login to bastion as ec2-user
-- rm -f create_and_assign_secgrp.sh && wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh -O create_and_assign_secgrp.sh
 - Create a security group by name access-via-bastion-secgrp and attach it to bastion instance
   - bash create_and_assign_secgrp.sh access-via-bastion-secgrp
 
@@ -48,8 +48,14 @@ In future when new instances are created allow network access to it from this se
 It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP you own.
 
 # HAProxy
-Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But same can be run on any other instance running load balancer.
-- Make sure http and https ports are added to security group
+Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But same can be run on any other instance that you plan to run the load balancer on. 
+- install haproxy
+ - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
+ - bash install_haproxy.sh
+- assign a security group 
+ - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh -O create_and_assign_secgrp.sh
+ - bash create_and_assign_secgrp.sh loadbalancer-secgrp
+- Make sure http(80,8080) and https(443,8443) ports are added to security group
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
 - If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the IP address of the apache server. This name is used in haproxy backend configuration.
 - systemctl start haproxy

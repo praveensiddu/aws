@@ -12,5 +12,5 @@ echo Type Y to reload the privilege tables and save your changes.
 read -t 10 -p "Read the instruction above and press enter"
 
 sudo mysql_secure_installation
-sudo systemctl start mariadb
+sudo systemctl restart mariadb
 sudo systemctl enable mariadb

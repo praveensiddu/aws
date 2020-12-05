@@ -58,9 +58,9 @@ Ideally bastion host must be hardened and must not run any additional software. 
 - Install haproxy
   - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
   - bash install_haproxy.sh
-- Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
-- If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the IP address of the apache server. This name is used in haproxy backend configuration.
-- systemctl start haproxy
+- You need a backend to test your haproxy. Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
+- If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the private IP address of the apache server. This hostname is used in haproxy.cfg.
+- systemctl restart haproxy
 - systemctl enable haproxy
 ### Configure TLS
 - Below instructions were derived from [here](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)

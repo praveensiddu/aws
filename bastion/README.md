@@ -48,14 +48,14 @@ In future when new instances are created allow network access to it from this se
 It is recommended to reserve an elastic IP in AWS and assign it to bastion host. This will help so that you don't need to change IP each time you restart Bastion. You can configure your domain and mobaxterm with this static IP you own.
 
 # HAProxy
-Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But same can be run on any other instance that you plan to run the load balancer on. 
-- install haproxy
- - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
- - bash install_haproxy.sh
+Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But below instructions can be run on any other instance that you plan to run the load balancer on.
 - assign a security group 
- - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh -O create_and_assign_secgrp.sh
- - bash create_and_assign_secgrp.sh loadbalancer-secgrp
-- Make sure http(80,8080) and https(443,8443) ports are added to security group
+  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/create_and_assign_secgrp.sh -O create_and_assign_secgrp.sh
+  - bash create_and_assign_secgrp.sh loadbalancer-secgrp
+- Make sure http(80,8080) and https(443,8443) incoming ports are added to security group 
+- Install haproxy
+  - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
+  - bash install_haproxy.sh
 - Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
 - If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the IP address of the apache server. This name is used in haproxy backend configuration.
 - systemctl start haproxy

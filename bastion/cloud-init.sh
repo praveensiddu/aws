@@ -11,6 +11,10 @@ sudo ./aws/install
 sudo systemctl enable docker
 sudo systemctl start docker
 
+# install ansible for automation( ideally a dedicated orchestration host is recommended)
+sudo amazon-linux-extras install ansible2
+
+# install haproxy only if you plan to run load balancer on bastion(A dedicated load balancer is recommended)
 sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
 bash install_haproxy.sh
 

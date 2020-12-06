@@ -7,4 +7,4 @@ fi
 export AMZLINUZ2_AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query 'Parameters[0].[Value]' --output text)
 wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh -O cloud-init.sh
 
-aws ec2 run-instances --image-id $AMZLINUZ2_AMI --count 1 --instance-type t2.micro --key-name  $MYSSHKEYNAME --user-data cloud-init.sh  --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=lamp}]"
+aws ec2 run-instances --image-id $AMZLINUZ2_AMI --count 1 --instance-type t2.micro --key-  me  $MYSSHKEYNAME --user-data cloud-init.sh  --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=lamp}]"  --security-groups lamp-secgrp

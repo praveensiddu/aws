@@ -51,10 +51,10 @@ It is recommended to reserve an elastic IP in AWS and assign it to bastion host.
 Ideally bastion host must be hardened and must not run any additional software. To save on cost(static IP and instance) I run load balancer on bastion. But below instructions can be run on any other instance that you plan to run the load balancer on.
 - create and assign a security group 
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/loadbalancer-cf.yml -O loadbalancer-cf.yml
-  - aws cloudformation create-stack --stack-name loadbalancer-stack --template-body file://loadbalancer-cf.yml  --parameters ParameterKey=MySecurityGroup,ParameterValue=loadbalancer-secgrp
+  - aws cloudformation create-stack --stack-name loadbalancer-stack --template-body file://loadbalancer-cf.yml  --parameters ParameterKey=MySecurityGroup,ParameterValue=outgoing-from-loadbalancer-secgrp
   - aws cloudformation delete-stack --stack-name loadbalancer-stack
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/assign_secgrp.sh -O assign_secgrp.sh
-  - bash assign_secgrp.sh loadbalancer-secgrp
+  - bash assign_secgrp.sh outgoing-from-loadbalancer-secgrp
 - Install haproxy
   - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
   - bash install_haproxy.sh

@@ -52,9 +52,9 @@ Ideally bastion host must be hardened and must not run any additional software. 
 - create and assign a security group 
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/loadbalancer-cf.yml -O loadbalancer-cf.yml
   - aws cloudformation create-stack --stack-name loadbalancer-stack --template-body file://loadbalancer-cf.yml  --parameters ParameterKey=MySecurityGroup,ParameterValue=outgoing-from-loadbalancer-secgrp
-  - aws cloudformation delete-stack --stack-name loadbalancer-stack
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/assign_secgrp.sh -O assign_secgrp.sh
   - bash assign_secgrp.sh outgoing-from-loadbalancer-secgrp
+  - sleep 5 && aws cloudformation delete-stack --stack-name loadbalancer-stack
 - Install haproxy
   - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
   - bash install_haproxy.sh

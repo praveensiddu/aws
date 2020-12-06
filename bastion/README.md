@@ -63,10 +63,10 @@ Ideally bastion host must be hardened and must not run any additional software. 
 - systemctl restart haproxy
 - systemctl enable haproxy
 ### Configure TLS
-- Below instructions were derived from [here](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)
-- Update **yourdomain** to point the bastion host public IP. If you don't have a domain [register a new one](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar.html)
-It is recommended to reserve an elastic IP in AWS and assign it to bastion host.
-- Get new certs in /etc/haproxy/certs
+Below instructions were derived from [this documentation](https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-centos-7)
+- Update **yourdomain** to point the public IP of the host on which haproxy is running. If you don't have a domain [register a new one](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar.html)
+It is recommended to an [elastic IP](https://console.aws.amazon.com/vpc/home?region=us-east-1#Addresses:) in AWS and assign it to haproxy host.
+- Follow the below steps to generate new certs in /etc/haproxy/certs
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/get-cert-letsencrypt.sh
   - bash get-cert-letsencrypt.sh **yourdomain**
   - At the prompts enter the following
@@ -75,6 +75,5 @@ It is recommended to reserve an elastic IP in AWS and assign it to bastion host.
     - (Y)es/(N)o: Y
 - sudo systemctl restart haproxy
 - Make sure your backend apache server is running and open https://yourdomain and https://yourdomain/phpMyAdmin in your browzer to test it.
-
 
 > Note of thanks. This README.md was edited using   

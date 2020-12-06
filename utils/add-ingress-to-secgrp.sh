@@ -1,5 +1,5 @@
-if [[ $1 == "" || $2 == "" || $3 == ""]]
-then
+#! /bin/bash
+if [[ "$1" == "" || "$2" == "" || $3 = "" ]]; then
         echo "Usage $0 destgrp sourcegrp port"
         exit 1
 fi

@@ -1,0 +1,30 @@
+- hosts: all
+  become: true
+
+  tasks:
+  - name: download cloud-init
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
+       dest: .
+       force: yes
+
+  - name: run cloud-init
+    shell: bash cloud-init.sh
+
+  - name: download cloud-init
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh
+       dest: .
+       force: yes
+
+  - name: run configure-apache.sh
+    shell: bash configure-apache.sh
+
+  - name: download configure-tls.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-tls.sh
+       dest: .
+       force: yes
+
+  - name: run configure-tls.sh
+    shell: bash configure-tls.sh

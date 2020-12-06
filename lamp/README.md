@@ -22,6 +22,13 @@ Create  instance
   - with this link as userdata https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
 - if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
+###  Allow access via bastion
+- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
+- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
+- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8090
+- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
+- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8443
+
 ###  Cloud init
 This step is needed only if cloud-init is not run by providing as userinput while creating instance.
 - Login to newly created host

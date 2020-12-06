@@ -22,11 +22,13 @@ Create  instance
   - with this link as userdata https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
 - if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
-
-###  Configure Apache 
+###  Cloud init
+This step is needed only if cloud-init is not run by providing as userinput while creating instance.
 - Login to newly created host
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh -O cloud-init.sh
 - bash cloud-init.sh
+###  Configure Apache 
+- Login to newly created host
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh -O configure-apache.sh
 - bash configure-apache.sh
 - curl http://localhost:80

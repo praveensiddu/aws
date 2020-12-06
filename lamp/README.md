@@ -21,8 +21,8 @@ Create  instance
   - SSH key name used to SSH from bastion
   - with this link as userdata https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
 > If you forgot to create the instance with user-data you can wget this file and execute it
-- if you are routing all traffic through a proxy(Bastion or load balancer) then you need only ssh from bastion in security group. Else open both http and https in security group.
-###  Allow access via bastion
+
+###  Allow access to bastion and loadbalancer
 - Login to bastion host
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80

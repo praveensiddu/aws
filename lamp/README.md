@@ -31,16 +31,17 @@ Create  instance
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8443
 
 # Install & configure
-Either use a fully automated 
-# Automated single comamnd
+Either use the fully automated approach or manually execute the commands
+## Fully Automated
 - Login to bastion host and set the following env variables.
   - export MYSQLROOTPASSWORD=
   - export LAMP_INST_IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=lamp" --query "Reservations[*].Instances[*].{Instance:PrivateIpAddress}" --output=text)
 - ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD" -i "$LAMP_INST_IP,"  ansible-setup.yml
 - Allow traffic from internet to this lamp instance either through a load balancer(recommended) or directly
-- Done
+- access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
 
-# Multiple commands using 
+## Multiple commands
+Use these steps if you prefer not to use the fully automated approach.
 ###  Cloud init
 This step is needed only if cloud-init is not run by providing as userinput while creating instance.
 - Login to newly created host

@@ -70,7 +70,7 @@ It is recommended to an [elastic IP](https://console.aws.amazon.com/vpc/home?reg
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/get-cert-letsencrypt.sh
   - bash get-cert-letsencrypt.sh **yourdomain**
   - At the prompts enter the following
-    - (Enter 'c' to cancel): ***youremailaddress.com***
+    - (Enter 'c' to cancel): ***youremailaddress***
     - (A)gree/(C)ancel: ***Y***
     - (Y)es/(N)o: Y
 - sudo systemctl restart haproxy

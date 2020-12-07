@@ -30,6 +30,17 @@ Create  instance
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8443
 
+# Install & configure
+Either use a fully automated 
+# Automated single comamnd
+- Login to bastion host and set the following env variables.
+  - export MYSQLROOTPASSWORD=
+  - export LAMP_INST_IP=  
+- ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD" -i "$LAMP_INST_IP,"  ansible-setup.yml
+- Allow traffic from internet to this lamp instance either through a load balancer(recommended) or directly
+- Done
+
+# Manually using 
 ###  Cloud init
 This step is needed only if cloud-init is not run by providing as userinput while creating instance.
 - Login to newly created host

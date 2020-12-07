@@ -28,3 +28,15 @@
 
   - name: run configure-tls.sh
     shell: bash configure-tls.sh
+
+  - name: download configure-tls.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/secure-db.sh
+       dest: .
+       force: yes
+       
+  - name: Secure the database server
+    shell:
+      cmd: bash secure-db.sh
+      stdin: "{{mysql_root_password}}"
+    no_log: true

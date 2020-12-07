@@ -40,7 +40,7 @@ Either use the fully automated approach or manually execute the commands
   - echo $LAMP_INST_IP
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD" -i "$LAMP_INST_IP,"  ansible-setup.yml
-- Allow traffic from internet to this lamp instance either through a load balancer(recommended) or directly
+- update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $LAMP_INST_IP"
 - access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
 
 ## Multiple commands

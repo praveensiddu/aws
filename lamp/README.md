@@ -51,14 +51,7 @@ This step is needed only if cloud-init is not run by providing as userinput whil
 ###  Secure the database server
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/secure-db.sh -O secure-db.sh
 - bash secure-db.sh
-  - Enter current password for root (enter for none):
-  - Set root password? [Y/n] Y
-  - New password:
-  - Re-enter new password:
-  - Remove anonymous users? [Y/n] Y
-  - Disallow root login remotely? [Y/n] Y
-  - Remove test database and access to it? [Y/n] Y
-  - Reload privilege tables now? [Y/n] Y
+  - Enter current password for mysql root 
 
 ### Install  and configure phpMyAdmin
 [phyMyAdmin](https://www.phpmyadmin.net/) is a web-based database management tool that you can use to view and edit the MySQL databases on your EC2 instance

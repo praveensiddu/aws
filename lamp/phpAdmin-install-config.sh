@@ -10,6 +10,7 @@ sudo systemctl restart php-fpm
 cd /var/www/html
 echo latest phpMyAdmin release
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
-mkdir -p phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1
+[ -d phpMyAdmin ] || mkdir phpMyAdmin
+tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1
 rm phpMyAdmin-latest-all-languages.tar.gz
 sudo systemctl start mariadb

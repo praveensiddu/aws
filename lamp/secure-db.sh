@@ -1,4 +1,7 @@
 #! /bin/bash
+sudo systemctl restart mariadb
+sudo systemctl enable mariadb
+
 echo -n mysqlrootpassword:
 read -s DATABASE_PASS
 echo

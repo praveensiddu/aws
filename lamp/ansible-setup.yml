@@ -40,3 +40,14 @@
       cmd: bash secure-db.sh
       stdin: "{{mysql_root_password}}"
     no_log: true
+
+  - name: download phpAdmin-install-config.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/phpAdmin-install-config.sh
+       dest: .
+       force: yes
+
+  - name: run phpAdmin-install-config.sh
+    shell: bash phpAdmin-install-config.sh
+    
+

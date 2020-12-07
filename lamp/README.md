@@ -37,6 +37,7 @@ Either use the fully automated approach or manually execute the commands
 - Login to bastion host and set the following env variables.
   - export MYSQLROOTPASSWORD=
   - export LAMP_INST_IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=lamp" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].{Instance:PrivateIpAddress}" --output=text)
+  - echo $LAMP_INST_IP
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD" -i "$LAMP_INST_IP,"  ansible-setup.yml
 - Allow traffic from internet to this lamp instance either through a load balancer(recommended) or directly

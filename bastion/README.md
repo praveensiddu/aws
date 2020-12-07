@@ -59,7 +59,7 @@ Ideally bastion host must be hardened and must not run any additional software. 
   - sudo wget https://raw.githubusercontent.com/praveensiddu/aws/main/bastion/install_haproxy.sh -O install_haproxy.sh
   - bash install_haproxy.sh
 - You need a backend to test your haproxy. Install LAMP following the instructions in https://github.com/praveensiddu/aws/tree/main/lamp
-- If you plan to run a haproxy as frontend to your apache server, define "apacheserver.local" in /etc/hosts with the private IP address of the apache server. This hostname is used in haproxy.cfg.
+- update the /etc/haproxy/haproxy.cfg by changing all occurrences of apacheserver.local with with the private IP address of the lamp instance.
 - systemctl restart haproxy
 - systemctl enable haproxy
 ### Configure TLS

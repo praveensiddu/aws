@@ -10,8 +10,21 @@
     shell: bash create-instance.sh
     environment:
         MYSSHKEYNAME: 'bastion-to-other-hosts-key'
+        
+  - name: Get private IP of the new instance
+    command: "aws ec2 describe-instances --filters "Name=tag:Name,Values=lamp" "Name=instance-state-name,Values=running" --query "Reservations[].Instances[].{Instance:PrivateIpAddress}" --output=text"
+      register: command_output
+  - debug: msg="{{command_output.stdout}}"
 
-- hosts: all
+  - set_fact:
+    LAMP_INST_IP: "{{ command_output.stdout }}"
+    
+  - name: add host to group 'just_created' with variable foo=42
+    add_host:
+      name: "{{ ip_from_ec2 }}"
+      groups: just_created
+    
+- hosts: just_created
   become: true
   tasks:
   

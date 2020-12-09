@@ -1,7 +1,20 @@
+- hosts: localhost
+  tasks:
+  - name: download create-instance.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/create-instance.sh
+       dest: .
+       force: yes
+
+  - name: run cloud-init
+    shell: bash create-instance.sh
+    environment:
+        MYSSHKEYNAME: 'bastion-to-other-hosts-key'
+
 - hosts: all
   become: true
-
   tasks:
+  
   - name: download cloud-init
     get_url:
        url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/cloud-init.sh
@@ -11,7 +24,23 @@
   - name: run cloud-init
     shell: bash cloud-init.sh
 
-  - name: download cloud-init
+  - name: download add-ingress-to-secgrp.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/add-ingress-to-secgrp.sh
+       dest: .
+       force: yes
+
+  - name: SSH access to bastion
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
+
+
+  - name: port 80 access to loadbalancer
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
+    
+  - name: port 443 access to loadbalancer
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
+    
+  - name: download configure apache
     get_url:
        url: https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/configure-apache.sh
        dest: .

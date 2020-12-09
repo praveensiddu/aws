@@ -27,9 +27,7 @@ Create  instance
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/utils/add-ingress-to-secgrp.sh -O add-ingress-to-secgrp.sh
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
-- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8090
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
-- bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 8443
 
 # Install & configure
 Either use the fully automated approach or manually execute the commands

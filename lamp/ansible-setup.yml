@@ -6,24 +6,52 @@
        dest: .
        force: yes
 
-  - name: run cloud-init
+  - name: run create-instance.sh
     shell: bash create-instance.sh
     environment:
         MYSSHKEYNAME: 'bastion-to-other-hosts-key'
         
+  - name: download get-private-ip.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/get-private-ip.sh
+       dest: .
+       force: yes
+
+  - name: Wait a little longer 
+    pause: seconds=60
+
   - name: Get private IP of the new instance
-    command: "aws ec2 describe-instances --filters "Name=tag:Name,Values=lamp" "Name=instance-state-name,Values=running" --query "Reservations[].Instances[].{Instance:PrivateIpAddress}" --output=text"
-      register: command_output
+    shell: bash get-private-ip.sh lamp
+    register: command_output
+        
   - debug: msg="{{command_output.stdout}}"
 
   - set_fact:
-    LAMP_INST_IP: "{{ command_output.stdout }}"
+      ip_from_ec2: "{{ command_output.stdout }}"
     
   - name: add host to group 'just_created' with variable foo=42
     add_host:
       name: "{{ ip_from_ec2 }}"
       groups: just_created
     
+  - name: download add-ingress-to-secgrp.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/add-ingress-to-secgrp.sh
+       dest: .
+       force: yes
+
+  - name: SSH access to bastion
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
+    ignore_errors: yes
+
+  - name: port 80 access to loadbalancer
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
+    ignore_errors: yes
+    
+  - name: port 443 access to loadbalancer
+    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
+    ignore_errors: yes
+
 - hosts: just_created
   become: true
   tasks:
@@ -37,21 +65,6 @@
   - name: run cloud-init
     shell: bash cloud-init.sh
 
-  - name: download add-ingress-to-secgrp.sh
-    get_url:
-       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/add-ingress-to-secgrp.sh
-       dest: .
-       force: yes
-
-  - name: SSH access to bastion
-    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-bastion-secgrp 22
-
-
-  - name: port 80 access to loadbalancer
-    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
-    
-  - name: port 443 access to loadbalancer
-    shell: bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
     
   - name: download configure apache
     get_url:

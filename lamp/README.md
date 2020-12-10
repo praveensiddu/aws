@@ -8,6 +8,21 @@ The examples in this folder contains instructions to quickly [install LAMP stack
   - ssh key based login to other hosts.
   - security group to allow login to other hosts.
 - You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
+
+# Install & configure
+Either use the fully automated approach or manually execute the commands
+## Fully Automated
+- Login to bastion host and set the following env variables.
+  - export MYSQLROOTPASSWORD=
+  - export ANSIBLE_HOST_KEY_CHECKING=false
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/ansible-setup.yml -O ansible-setup.yml
+- ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD"  ansible-setup.yml
+- update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $LAMP_INST_IP"
+- access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
+
+## Multiple commands
+Use these steps if you prefer not to use the fully automated approach.
+
 ## Either create using CLI or manually on the UI.
 ### Create AWS Linux2 Instance using CLI
 Create  instance
@@ -29,20 +44,7 @@ Create  instance
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 80
 - bash add-ingress-to-secgrp.sh lamp-secgrp outgoing-from-loadbalancer-secgrp 443
 
-# Install & configure
-Either use the fully automated approach or manually execute the commands
-## Fully Automated
-- Login to bastion host and set the following env variables.
-  - export MYSQLROOTPASSWORD=
-  - export LAMP_INST_IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=lamp" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].{Instance:PrivateIpAddress}" --output=text)
-  - echo $LAMP_INST_IP
-- wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/ansible-setup.yml -O ansible-setup.yml
-- ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD" -i "$LAMP_INST_IP,"  ansible-setup.yml
-- update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $LAMP_INST_IP"
-- access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
 
-## Multiple commands
-Use these steps if you prefer not to use the fully automated approach.
 ###  Cloud init
 This step is needed only if cloud-init is not run by providing as userinput while creating instance.
 - Login to newly created host

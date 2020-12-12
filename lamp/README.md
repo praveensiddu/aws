@@ -20,6 +20,7 @@ Either use the fully automated approach or manually execute the commands
 - export LAMP_INST_IP=$(bash get-private-ip.sh lamp)
 - curl http://$LAMP_INST_IP:80
 - update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $LAMP_INST_IP"
+- systemctl restart haproxy
 - access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
 
 ## Multiple commands

@@ -19,7 +19,7 @@
        dest: .
        force: yes
 
-  - name: Wait a little longer 
+  - name: Waiting the instance to get to running state
     pause: seconds=60
 
   - name: Get private IP of the new instance

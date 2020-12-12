@@ -15,6 +15,7 @@ Either use the fully automated approach or manually execute the commands
 - Login to bastion host and set the following env variables.
   - export MYSQLROOTPASSWORD=CHANGEME_PASSWORD
   - export ANSIBLE_HOST_KEY_CHECKING=false
+  - export LAMPINSTNAME=lampinst1
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/lamp/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook -e  "mysql_root_password=$MYSQLROOTPASSWORD"  ansible-setup.yml
 - export LAMP_INST_IP=$(bash get-private-ip.sh $LAMPINSTNAME)

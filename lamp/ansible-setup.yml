@@ -12,6 +12,7 @@
     shell: bash create-instance.sh
     environment:
         MYSSHKEYNAME: 'bastion-to-other-hosts-key'
+        LAMPINSTNAME: "{{LAMPINSTNAME}}"
         
   - name: download get-private-ip.sh
     get_url:
@@ -23,7 +24,7 @@
     pause: seconds=60
 
   - name: Get private IP of the new instance
-    shell: bash get-private-ip.sh lamp
+    shell: bash get-private-ip.sh {{LAMPINSTNAME}}
     register: command_output
         
   - debug: msg="{{command_output.stdout}}"

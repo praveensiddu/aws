@@ -20,7 +20,7 @@
        dest: .
        force: yes
 
-  - name: Waiting the instance to get to running state
+  - name: Waiting for the instance to get to running state
     pause: seconds=60
 
   - name: Get private IP of the new instance
@@ -31,12 +31,7 @@
 
   - set_fact:
       ip_from_ec2: "{{ command_output.stdout }}"
-    
-  - name: add host to group 'just_created' with variable foo=42
-    add_host:
-      name: "{{ ip_from_ec2 }}"
-      groups: just_created
-    
+      
   - name: download add-ingress-to-secgrp.sh
     get_url:
        url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/add-ingress-to-secgrp.sh
@@ -53,7 +48,11 @@
     
   - name: port 443 access to loadbalancer
     shell: bash add-ingress-to-secgrp.sh {{INSTNAME}}-secgrp outgoing-from-loadbalancer-secgrp 443
-    ignore_errors: yes
+    ignore_errors: yes    
+  - name: add host to group 'just_created' with variable foo=42
+    add_host:
+      name: "{{ ip_from_ec2 }}"
+      groups: just_created
 
 - hosts: just_created
   become: true
@@ -70,18 +69,18 @@
 
  
   - name: run K3S
-    shell: bash curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+    shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
     
    
   - name: deploy nginx
     shell: kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_deployment.yaml
  
    
-  - name: deploy nginx
+  - name: create nginx service
     shell: kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_service.yaml
     
    
-  - name: deploy nginx
+  - name: create route to nginx service
     shell: kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx_ingress.yaml
     
 

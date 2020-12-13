@@ -15,7 +15,7 @@ Either use the fully automated approach or manually execute the commands
   - export ANSIBLE_HOST_KEY_CHECKING=false
   - export INSTNAME=k3s-nginx
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
-- ansible-playbook -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
+- ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)
 - curl http://$INST_IP:80
 - update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $INST_IP"

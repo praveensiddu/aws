@@ -11,7 +11,7 @@ The examples in this folder contains instructions to quickly [install LAMP stack
 
 # Install & configure
 Either use the fully automated approach or manually execute the commands
-## Fully Automated
+## Automated Approach
 - Login to bastion host and set the following env variables.
   - export MYSQLROOTPASSWORD=CHANGEME_PASSWORD
   - export ANSIBLE_HOST_KEY_CHECKING=false
@@ -24,7 +24,7 @@ Either use the fully automated approach or manually execute the commands
 - sudo systemctl restart haproxy
 - access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
 
-## Multiple commands
+## Manual Approach
 Use these steps if you prefer not to use the fully automated approach.
 
 ## Either create using CLI or manually on the UI.

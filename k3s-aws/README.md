@@ -7,6 +7,27 @@ This page contains instructions to run K3s in AWS and deploy a sample applicatio
   - ssh key based login to other hosts.
   - security group to allow login to other hosts.
 - You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
+
+# Install & configure
+Either use the fully automated approach or manually execute the commands
+## Automated Approach
+- Login to bastion host and set the following env variables.
+  - export ANSIBLE_HOST_KEY_CHECKING=false
+  - export INSTNAME=k3s-nginx
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
+- ansible-playbook -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
+- export INST_IP=$(bash get-private-ip.sh $INSTNAME)
+- curl http://$INST_IP:80
+- update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $INST_IP"
+- sudo systemctl restart haproxy
+- access nginx page http://yourdomain/
+
+## Manual Approach
+Use these steps if you prefer not to use the fully automated approach.
+
+## Either create using CLI or UI.
+### Create AWS Linux2 Instance using CLI
+
 ## Either create using CLI or manually on the UI.
 ### Create Ubuntu instance using CLI
 Create Ubuntu instance

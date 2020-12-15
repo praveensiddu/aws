@@ -28,4 +28,7 @@ Either use the fully automated approach or manually execute the commands
 - 
 
 # Build docker image
-
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/build-host/Dockerfile -O Dockerfile
+- sudo docker build -t mywebapp .
+- sudo docker run -d -p 80:8080 mywebapp
+- 

@@ -17,10 +17,8 @@ Either use the fully automated approach or manually execute the commands
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/build-host/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)
-- curl http://$INST_IP:80
 
-
-# Install & configure
+# Build web application
 
 - git clone https://github.com/JavaTutorialNetwork/Tutorials.git
 - cd Tutorials/SimpleServlet
@@ -28,3 +26,6 @@ Either use the fully automated approach or manually execute the commands
 - mvn package
    and the war file will be built in target/SimpleServlet-1.war
 - 
+
+# Build docker image
+

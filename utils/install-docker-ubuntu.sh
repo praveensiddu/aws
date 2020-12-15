@@ -9,5 +9,7 @@ sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/u
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo apt install -y docker-compose
+sudo systemctl enable docker
+sudo systemctl start docker
 sudo docker run hello-world
 

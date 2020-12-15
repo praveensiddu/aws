@@ -66,3 +66,34 @@
 
   - name: run cloud-init
     shell: bash cloud-init.sh
+
+  
+  - name: download install-docker-ubuntu.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/install-docker-ubuntu.sh
+       dest: .
+       force: yes
+
+  - name: run install-docker-ubuntu.sh
+    shell: bash install-docker-ubuntu.sh
+
+  
+  - name: download install-java-ubuntu.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/install-java-ubuntu.sh
+       dest: .
+       force: yes
+
+  - name: run install-java-ubuntu.sh
+    shell: bash install-java-ubuntu.sh
+
+  
+  - name: download install-maven-ubuntu.sh
+    get_url:
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/utils/install-maven-ubuntu.sh
+       dest: .
+       force: yes
+
+  - name: run install-maven-ubuntu.sh
+    shell: bash install-maven-ubuntu.sh
+

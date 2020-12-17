@@ -1,4 +1,4 @@
-FROM tomcat:8.0-alpine
+FROM tomcat:9.0
 LABEL maintainer="Praveen"
 
 ADD ./target/SimpleServlet-1.war /usr/local/tomcat/webapps/

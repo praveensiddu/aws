@@ -19,16 +19,18 @@ Either use the fully automated approach or manually execute the commands
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)
 
 # Build web application
-
 - git clone https://github.com/JavaTutorialNetwork/Tutorials.git
 - cd Tutorials/SimpleServlet
 - mvn clean
 - mvn package
    and the war file will be built in target/SimpleServlet-1.war
+- wget https://raw.githubusercontent.com/praveensiddu/aws/main/build-host/docker-compose.yml -O docker-compose.yml
+- sudo docker-compose up
+- curl localhost:8080/hello
 - 
 
 # Build docker image
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/build-host/Dockerfile -O Dockerfile
 - sudo docker build -t mywebapp .
 - sudo docker run -d -p 80:8080 mywebapp
-- 
+

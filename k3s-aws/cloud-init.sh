@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "set -o vi" >> ~/.bashrc
+echo "set -o vi" >> /home/ubuntu/.bashrc
 sudo bash -c 'echo set -o vi >> ~root/.bashrc'
 
 sudo apt update && sudo apt -y upgrade 

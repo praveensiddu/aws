@@ -15,7 +15,7 @@ sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.y
 sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
 sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml
 
-cat ./traefik_helm_values.yaml >> /var/lib/rancher/k3s/server/manifests/traefik.yaml
+sudo cat ./traefik_helm_values.yaml >> /var/lib/rancher/k3s/server/manifests/traefik.yaml
 
 # cleanup . do not leave private keys at multiple places.
 rm -f ./$MYDOMAIN.cert

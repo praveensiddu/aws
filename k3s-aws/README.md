@@ -32,7 +32,7 @@ Either use the fully automated approach or manually execute the commands
   - sudo sed '0,/BEGIN PRIVATE KEY/D' /etc/haproxy/certs/$MYDOMAIN.pem >> /etc/haproxy/certs/$MYDOMAIN.key
   - export MYDOMAIN_PUBLIC_CERT=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.pub)
   - export MYDOMAIN_PRIV_KEY=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.key)
-  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/traefik_helm_values.yaml -O traefik_helm_values.yaml
+  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/traefik/traefik_helm_values.yaml -O traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml

@@ -27,6 +27,16 @@ Either use the fully automated approach or manually execute the commands
   - export MYDOMAIN=k3s.praveentest.com
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
   - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
+
+### Access Traefik dashboard to kubernetes dashboard
+  - Update DNS of MYDOMAIN to the public IP of your instance
+  - Update security group to allow incoming for port 443
+  - access https://MYDOMAIN/dashboard/  
+| instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
+  - access https://MYDOMAIN/kubernetes/
+  - Obtain the token for admin login 
+    - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+### Configure TLS cert from lets encrypt
   - sudo sed '/BEGIN PRIVATE KEY/Q' /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.pub
   - sudo grep "BEGIN PRIVATE KEY" /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.key
   - sudo sed '0,/BEGIN PRIVATE KEY/D' /etc/haproxy/certs/$MYDOMAIN.pem >> /etc/haproxy/certs/$MYDOMAIN.key
@@ -36,13 +46,7 @@ Either use the fully automated approach or manually execute the commands
   - sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml
-### Login to dashboard
-instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
-  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/install-dashboard.sh -O install-dashboard.sh
-  - bash install-dashboard.sh
-  - Obtain the token for admin login 
-    - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
-
+  
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)
 - curl http://$INST_IP:80
 - update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $INST_IP"

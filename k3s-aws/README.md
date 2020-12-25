@@ -39,6 +39,7 @@ Either use the fully automated approach or manually execute the commands
   - 
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/kubernetes-dashboard_ingress.yaml -O kubernetes-dashboard_ingress.yaml
   - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g"  kubernetes-dashboard_ingress.yaml
+  - kubectl apply -f kubernetes-dashboard_ingress.yaml
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)

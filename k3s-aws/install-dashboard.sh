@@ -1,5 +1,5 @@
 #! /bin/bash
-if [[ $MYDOMAIN== "" ]]
+if [[ $MYDOMAIN == "" ]]
 then
         echo "Set env MYDOMAIN to you kubernetes cluster domain"
         exit 1

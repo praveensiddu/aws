@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
 spec:
   rules:
-  - host: k3s.praveentest.com
+  - host: CHANGEME_MYDOMAIN
     http:
       paths:
       - path: /kubernetes

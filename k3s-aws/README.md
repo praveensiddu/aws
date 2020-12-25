@@ -34,8 +34,9 @@ Either use the fully automated approach or manually execute the commands
   - access https://MYDOMAIN/dashboard/  
 | instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
   - access https://MYDOMAIN/kubernetes/
-  - Obtain the token for admin login 
+  - Login to the instance you created from bastion and obtain the token for admin login 
     - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+  - login to https://MYDOMAIN/kubernetes/ and switch to all namespaces at the top left.   
 ### Configure TLS cert from lets encrypt
   - sudo sed '/BEGIN PRIVATE KEY/Q' /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.pub
   - sudo grep "BEGIN PRIVATE KEY" /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.key

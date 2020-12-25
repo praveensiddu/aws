@@ -8,6 +8,16 @@ This page contains instructions to run K3s in AWS and deploy a sample applicatio
   - security group to allow login to other hosts.
 - You can also verify that your keypair is present here https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:
 
+# What will be covered in this tutorial?
+Install K3s with loadbalancer and kubernetes dashboard. Get a certificate from lets encrypt and configure TLS for your cluster to ensure traffic between your browzer and K3s is encrypted.
+## 
+Install K3S on ubuntu
+Point your domain DNS to the public IP of the EC2 instance you created. This is required to obtain certificate from lets encrypt.
+Create certi
+Obtain certificates 
+
+
+
 # Install & configure
 Either use the fully automated approach or manually execute the commands
 ## Automated Approach
@@ -35,8 +45,7 @@ Either use the fully automated approach or manually execute the commands
   - sleep 5
   - kubectl get endpoints kubernetes-dashboard -n kubernetes-dashboard
   - Obtain the token for admin login 
-  kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
-  - 
+    - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/kubernetes-dashboard_ingress.yaml -O kubernetes-dashboard_ingress.yaml
   - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g"  kubernetes-dashboard_ingress.yaml
   - kubectl apply -f kubernetes-dashboard_ingress.yaml

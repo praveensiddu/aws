@@ -60,8 +60,7 @@
 
   - name: run K3S
     shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
-    
-   
+
   - name: download cloud-init
     get_url:
        url: https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/cloud-init.sh
@@ -71,7 +70,7 @@
   - name: run cloud-init
     shell: bash cloud-init.sh
 
-   - name: download config-traefik.sh
+  - name: download config-traefik.sh
     get_url:
        url: https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/config-traefik.sh
        dest: .

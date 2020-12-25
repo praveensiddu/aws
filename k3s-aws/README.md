@@ -24,6 +24,21 @@ Either use the fully automated approach or manually execute the commands
   - sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
   - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml
+- Deploy dashboard
+  - instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
+  - GITHUB_URL=https://github.com/kubernetes/dashboard/releases
+  - VERSION_KUBE_DASHBOARD=$(curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||')
+  - wget https://raw.githubusercontent.com/kubernetes/dashboard/${VERSION_KUBE_DASHBOARD}/aio/deploy/alternative.yaml -O alternative.yaml 
+  - kubectl apply -f alternative.yaml 
+  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/dashboard/sa.yaml -O sa.yaml
+  - kubectl apply -f sa.yaml
+  - sleep 5
+  - kubectl get endpoints kubernetes-dashboard -n kubernetes-dashboard
+  - Obtain the token for admin login 
+  kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+  - 
+  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/kubernetes-dashboard_ingress.yaml -O kubernetes-dashboard_ingress.yaml
+  - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g"  kubernetes-dashboard_ingress.yaml
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)

@@ -14,6 +14,12 @@ Either use the fully automated approach or manually execute the commands
 - Login to bastion host and set the following env variables.
   - export ANSIBLE_HOST_KEY_CHECKING=false
   - export INSTNAME=k3s-nginx
+  - export MYDOMAIN=k3s.praveentest.com
+  - sed '/BEGIN PRIVATE KEY/Q' /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.pub
+  - grep "BEGIN PRIVATE KEY" /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.key
+  - sed '0,/BEGIN PRIVATE KEY/D' /etc/haproxy/certs/$MYDOMAIN.pem >> /etc/haproxy/certs/$MYDOMAIN.key
+  - export MYDOMAIN_PUBLIC_CERT=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.pub)
+  - export MYDOMAIN_PRIV_KEY=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.key)
 - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
 - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME"  ansible-setup.yml
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)

@@ -21,13 +21,17 @@ Obtain certificates
 # Install & configure
 Either use the fully automated approach or manually execute the commands
 ## Automated Approach
-- Login to bastion host and set the following env variables.
+- Login to bastion host and set the following env variables as per your environment
+```
   - export ANSIBLE_HOST_KEY_CHECKING=false
   - export INSTNAME=k3s-nginx
   - export MYDOMAIN=k3s.praveentest.com
+```
+- Execute the following comamnd
+```
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
   - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
-
+```
 ### Access Traefik dashboard & kubernetes dashboard
   - Find the public ip of the instance you created
 ```
@@ -35,9 +39,11 @@ curl -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/get-pub
 ```
   - Update DNS of MYDOMAIN to this public IP 
   - Update security group to allow incoming for port 443
-| curl  -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/allow-ingress-to-ip.sh | sh -s - ${INSTNAME}-secgrp 0.0.0.0/0 443
+```
+curl  -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/allow-ingress-to-ip.sh | sh -s - ${INSTNAME}-secgrp 0.0.0.0/0 443
+```
   - access https://MYDOMAIN/dashboard/  
-| instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
+| Input for this tutorial was derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
   - access https://MYDOMAIN/kubernetes/
   - Login to the instance you created from bastion and obtain the token for admin login 
     - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token

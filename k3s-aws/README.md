@@ -37,7 +37,7 @@ ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansibl
 ```
 curl -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/get-public-ip.sh  | sh -s - $INSTNAME
 ```
-  - Update DNS of MYDOMAIN to this public IP 
+  - Update DNS of MYDOMAIN and *.MYDOMAIN to this public IP 
   - Update security group to allow incoming for port 443
 ```
 curl  -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/allow-ingress-to-ip.sh | sh -s - ${INSTNAME}-secgrp 0.0.0.0/0 443

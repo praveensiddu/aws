@@ -23,14 +23,14 @@ Either use the fully automated approach or manually execute the commands
 ## Automated Approach
 - Login to bastion host and set the following env variables as per your environment
 ```
-  - export ANSIBLE_HOST_KEY_CHECKING=false
-  - export INSTNAME=k3s-nginx
-  - export MYDOMAIN=k3s.praveentest.com
+export ANSIBLE_HOST_KEY_CHECKING=false
+export INSTNAME=k3s-nginx
+export MYDOMAIN=k3s.praveentest.com
 ```
 - Execute the following comamnd
 ```
-  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
-  - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
+wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
+ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
 ```
 ### Access Traefik dashboard & kubernetes dashboard
   - Find the public ip of the instance you created
@@ -46,18 +46,22 @@ curl  -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/allow-
 | Input for this tutorial was derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
   - access https://MYDOMAIN/kubernetes/
   - Login to the instance you created from bastion and obtain the token for admin login 
-    - kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+```
+kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+```
   - login to https://MYDOMAIN/kubernetes/ and switch to all namespaces at the top left.   
 ### Configure TLS cert from lets encrypt
-  - sudo sed '/BEGIN PRIVATE KEY/Q' /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.pub
-  - sudo grep "BEGIN PRIVATE KEY" /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.key
-  - sudo sed '0,/BEGIN PRIVATE KEY/D' /etc/haproxy/certs/$MYDOMAIN.pem >> /etc/haproxy/certs/$MYDOMAIN.key
-  - export MYDOMAIN_PUBLIC_CERT=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.pub)
-  - export MYDOMAIN_PRIV_KEY=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.key)
-  - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/traefik/traefik_helm_values.yaml -O traefik_helm_values.yaml
-  - sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.yaml
-  - sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
-  - sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml
+```
+sudo sed '/BEGIN PRIVATE KEY/Q' /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.pub
+sudo grep "BEGIN PRIVATE KEY" /etc/haproxy/certs/$MYDOMAIN.pem > /etc/haproxy/certs/$MYDOMAIN.key
+sudo sed '0,/BEGIN PRIVATE KEY/D' /etc/haproxy/certs/$MYDOMAIN.pem >> /etc/haproxy/certs/$MYDOMAIN.key
+export MYDOMAIN_PUBLIC_CERT=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.pub)
+export MYDOMAIN_PRIV_KEY=$(base64 -w 0 /etc/haproxy/certs/$MYDOMAIN.key)
+wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/traefik/traefik_helm_values.yaml -O traefik_helm_values.yaml
+sed -i "s/CHANGEME_MYDOMAIN_PRIV_KEY/$MYDOMAIN_PRIV_KEY/g" traefik_helm_values.yaml
+sed -i "s/CHANGEME_MYDOMAIN_PUBLIC_CERT/$MYDOMAIN_PUBLIC_CERT/g" traefik_helm_values.yaml
+sed -i "s/CHANGEME_MYDOMAIN/$MYDOMAIN/g" traefik_helm_values.yaml
+```
   
 - export INST_IP=$(bash get-private-ip.sh $INSTNAME)
 - curl http://$INST_IP:80

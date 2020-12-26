@@ -7,7 +7,7 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: CHANGEME_MYDOMAIN
+  - host: nginx.CHANGEME_MYDOMAIN
     http:
       paths:
       - path: /

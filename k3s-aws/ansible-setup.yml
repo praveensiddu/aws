@@ -91,22 +91,14 @@
     shell: bash install-dashboard.sh
     environment:
       MYDOMAIN: "{{MYDOMAIN}}"
-
-
-  - name: deploy nginx
-    shell: kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx/nginx_deployment.yaml
- 
-  - name: create nginx service
-    shell: kubectl apply -f https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx/nginx_service.yaml
-    
-  - name: download nginx_ingress.yaml
+      
+  - name: download install-nginx.sh
     get_url:
-       url: https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/manifests/nginx/nginx_ingress.yaml
+       url: https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/install-nginx.sh
        dest: .
        force: yes
-       
-       
-  - name: create route to nginx service
-    shell: kubectl apply -f nginx_ingress.yaml
-    
 
+  - name: run install-nginx.sh
+    shell: bash install-nginx.sh
+    environment:
+      MYDOMAIN: "{{MYDOMAIN}}"

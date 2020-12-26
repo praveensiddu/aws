@@ -78,6 +78,8 @@
 
   - name: Configure traefik loadbalancer with self signed certificate
     shell: bash config-traefik.sh
+    environment:
+      MYDOMAIN: "{{MYDOMAIN}}"
 
   - name: download kubernetes dashboard install script install-dashboard.sh
     get_url:
@@ -87,6 +89,8 @@
 
   - name: run install-dashboard.sh
     shell: bash install-dashboard.sh
+    environment:
+      MYDOMAIN: "{{MYDOMAIN}}"
 
 
   - name: deploy nginx

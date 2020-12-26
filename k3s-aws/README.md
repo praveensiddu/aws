@@ -30,9 +30,10 @@ Either use the fully automated approach or manually execute the commands
 
 ### Access Traefik dashboard & kubernetes dashboard
   - Find the public ip of the instance you created
-  | curl -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/get-public-ip.sh  | sh -s - $INSTNAME
+| curl -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/get-public-ip.sh  | sh -s - $INSTNAME
   - Update DNS of MYDOMAIN to this public IP 
   - Update security group to allow incoming for port 443
+| curl  -sfL  https://raw.githubusercontent.com/praveensiddu/aws/main/utils/allow-ingress-to-ip.sh | sh -s - ${INSTNAME}-secgrp 0.0.0.0/0 443
   - access https://MYDOMAIN/dashboard/  
 | instruction were derived from https://pgillich.medium.com/setup-lightweight-kubernetes-with-k3s-6a1c57d62217
   - access https://MYDOMAIN/kubernetes/

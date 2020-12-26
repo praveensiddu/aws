@@ -26,9 +26,9 @@ Either use the fully automated approach or manually execute the commands
   - export INSTNAME=k3s-nginx
   - export MYDOMAIN=k3s.praveentest.com
   - wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
-  - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME,MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
+  - ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
 
-### Access Traefik dashboard to kubernetes dashboard
+### Access Traefik dashboard & kubernetes dashboard
   - Update DNS of MYDOMAIN to the public IP of your instance
   - Update security group to allow incoming for port 443
   - access https://MYDOMAIN/dashboard/  

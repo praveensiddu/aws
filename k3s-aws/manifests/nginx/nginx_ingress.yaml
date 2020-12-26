@@ -6,6 +6,10 @@ metadata:
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  tls:
+  - hosts:
+      - nginx.CHANGEME_MYDOMAIN
+    secretName: nginx-example-tls-secret
   rules:
   - host: nginx.CHANGEME_MYDOMAIN
     http:

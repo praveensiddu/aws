@@ -31,6 +31,7 @@ export MYDOMAIN=k3s.praveentest.com
 ```
 wget https://raw.githubusercontent.com/praveensiddu/aws/main/k3s-aws/ansible-setup.yml -O ansible-setup.yml
 ansible-playbook  -u ubuntu  -e  "INSTNAME=$INSTNAME MYDOMAIN=$MYDOMAIN"  ansible-setup.yml
+k3s check-config
 ```
 ### Access Traefik dashboard & kubernetes dashboard
   - Find the public ip of the instance you created

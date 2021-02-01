@@ -22,7 +22,8 @@ Either use the fully automated approach or manually execute the commands
 - curl http://$LAMP_INST_IP:80
 - update the /etc/haproxy/haproxy.cfg on load balancer host to point to this IP "echo $LAMP_INST_IP"
 - sudo systemctl restart haproxy
-- access phpAdmin page http://yourdomain/phpMyAdmin/ and make sure you can login as root.
+- to test haproxy is configured properly run curl http://localhost:80
+- (optional step) Temporarily allow access from internet to the this instance and access phpAdmin page http://publicip/phpMyAdmin/ and make sure you can login as root.
 
 ## Manual Approach
 Use these steps if you prefer not to use the fully automated approach.

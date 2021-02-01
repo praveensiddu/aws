@@ -22,7 +22,8 @@ DOMAIN="$1" && sudo -E bash -c "cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem 
 #Secure access to the combined file, which contains the private key, with this command:
 sudo chmod -R go-rwx /etc/haproxy/certs
 
-sudo [ ! -f /etc/haproxy/certs/yourdomain.pem ] && { echo "creating link to yourdomain.pem"; ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem; 
+sudo [ ! -f /etc/haproxy/certs/yourdomain.pem ] && { echo "creating link to yourdomain.pem"; ln -s /etc/haproxy/certs/$1.pem /etc/haproxy/certs/yourdomain.pem;  }
+
 
 
 cd /etc/haproxy

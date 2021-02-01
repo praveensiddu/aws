@@ -77,6 +77,7 @@ It is recommended to an [elastic IP](https://console.aws.amazon.com/vpc/home?reg
     - (Enter 'c' to cancel): ***youremailaddress***
     - (A)gree/(C)ancel: ***Y***
     - (Y)es/(N)o: Y
+- Modify /etc/haproxy/haproxy.cfg or /etc/hosts to point to the right backend on 443 and 80
 - sudo systemctl restart haproxy
 - Make sure your backend apache server is running and open https://yourdomain and https://yourdomain/phpMyAdmin in your browzer to test it.
 

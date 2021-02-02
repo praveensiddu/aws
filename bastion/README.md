@@ -2,6 +2,7 @@
 This page contains instructions to create a bastion host in AWS.
 
 ## Concept
+----
 Bastion hosts (also called “jump servers”) are often used as a best practice for accessing privately accessible hosts within a system environment. For example, your system might include an application host that is not intended to be publicly accessible. To access it for product updates or managing system patches, you typically log in to a bastion host and then access (or “jump to”) the application host from there. 
 Access to the bastion host is ideally restricted to a specific IP range, typically from your organization’s corporate network or IP assigned to your home router by ISP. The benefit of using a bastion host in this regard is that access to any of the internal hosts is isolated to one means of access: through either a single bastion host or a group. For further isolation, the bastion host generally resides in a separate VPC.
 
